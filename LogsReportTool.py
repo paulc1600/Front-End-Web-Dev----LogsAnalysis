@@ -119,9 +119,9 @@ def open_report_page():
 
     # Append the answers from the "database"
     content += report_page.format(
-        q1_results_row1='"Princess Shellfish Marries Prince Handsome" — 1201 views',
-        q1_results_row2='"Baltimore Ravens Defeat Rhode Island Shoggoths" — 915 views',
-        q1_results_row3='"Political Scandal Ends In Political Scandal" — 553 views',
+        q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
+        q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
+        q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
         q2_results='Ursula La Multa — 2304 views',
         q3_results='July 29, 2016 — 2.5% errors'
     )
