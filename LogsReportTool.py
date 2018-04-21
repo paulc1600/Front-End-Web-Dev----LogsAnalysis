@@ -1,4 +1,5 @@
 #!/usr/bin/env python2.7
+# encoding=utf8
 # -----------------------------------------------------------------
 # Udacity Course: Full Stack Web Developer
 # Proj #3: Logs Reporting Tool
