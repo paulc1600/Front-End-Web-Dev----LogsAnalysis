@@ -118,10 +118,11 @@ def get_posts():
 def open_report_page():
     # The text content for the report page
     content = ''
+    now = datetime.datetime.now()
 
     # Append the answers from the "database"
     content += report_page.format(
-        report_date = date.today(),
+        report_date = str(now),
         q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
         q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
         q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
