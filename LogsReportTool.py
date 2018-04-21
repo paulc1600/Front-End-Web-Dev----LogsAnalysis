@@ -30,7 +30,7 @@
 #   time    | timestamp with time zone  | default now()
 #   id      | integer                   | not null (1)
 #   --------+---------------------------+--------------------------
-#                (1) default nextval(’articles_id_seq’::regclass)
+#                (1) default nextval('articles_id_seq'::regclass)
 #
 #   Table authors
 #   --------+---------+--------------------------------------------
@@ -96,6 +96,21 @@ report_page = '''
 ===============================================================================
 
 '''
+
+def get_posts():
+	"""Return all posts from the 'database', most recent first."""
+	conn = psycopg2.connect("dbname=forum")
+	cursor = conn.cursor()
+	cursor.execute("select content, time from posts order by time desc")
+	all_posts_list = cursor.fetchall()
+	all_clean_list = []
+	for one_post in all_posts_list:
+		one_clean_post = ((),())
+		# Use bleach to clean user content of post so no Jave Script injection attack
+		one_clean_post = (bleach.clean(one_post[0]), one_post[1])
+		all_clean_list.append(one_clean_post)
+	conn.close()
+	return all_clean_list
 
 def open_report_page():
     # The text content for the report page
