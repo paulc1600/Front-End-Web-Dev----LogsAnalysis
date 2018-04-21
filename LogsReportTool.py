@@ -13,7 +13,7 @@
 #         newsdata_report.txt          -- output report text file
 #
 # -----------------------------------------------------------------
-#  PPC | 04/21/2018 | Dummy database mockup
+#  PPC | 04/21/2018 | Dummy database mockup code
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
 #  newsdata.sql table structures were as follows:
