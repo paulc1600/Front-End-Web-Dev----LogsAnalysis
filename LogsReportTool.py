@@ -66,6 +66,7 @@
 # -----------------------------------------------------------------
 #
 import psycopg2
+import datetime
 import webbrowser
 import os
 import re
@@ -120,6 +121,7 @@ def open_report_page():
 
     # Append the answers from the "database"
     content += report_page.format(
+        report_date = date.today(),
         q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
         q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
         q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
