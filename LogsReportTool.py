@@ -30,13 +30,12 @@ report_page = '''
   Purpose:   A reporting tool that prints out database reports (in plain text)
   Database:  newsdata.sql
   Date:      {report_date}
+  
 ===============================================================================
 1. What are the most popular three articles of all time? Which articles have
    been accessed the most?
 
-    {q1_results_row1}
-    {q1_results_row2}
-    {q1_results_row3}
+    {q1_results}
 
  2. Who are the most popular article authors of all time? Which authors get the
     most page views from all the articles they have written?
@@ -47,39 +46,45 @@ report_page = '''
 
     {q3_results}
 
-
 ===============================================================================
-
 '''
 
-def get_posts():
-	"""Return all posts from the 'database', most recent first."""
-	conn = psycopg2.connect("dbname=forum")
-	cursor = conn.cursor()
-	cursor.execute("select content, time from posts order by time desc")
-	all_posts_list = cursor.fetchall()
-	all_clean_list = []
-	for one_post in all_posts_list:
-		one_clean_post = ((),())
-		# Use bleach to clean user content of post so no Jave Script injection attack
-		one_clean_post = (bleach.clean(one_post[0]), one_post[1])
-		all_clean_list.append(one_clean_post)
-	conn.close()
-	return all_clean_list
+q1_rows_list = []        # What are the most popular three articles?
+
+# -----------------------------------------------------------------
+#  Get DB SQL Data for Questions
+# -----------------------------------------------------------------
+def get_dbanswer_1():
+    """Get DB SQL Data for Questions"""
+    conn = psycopg2.connect("dbname=news")
+    cursor = conn.cursor()
+
+    # What are the most popular three articles?
+    PSQL = "SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3" 
+    cursor.execute(PSQL)
+    q1_rows_list = cursor.fetchall()
+    conn.close()
+    return q1_rows_list
 
 def open_report_page():
     # The text content for the report page
     content = ''
     now = datetime.datetime.now()
-
-    # Append the answers from the "database"
+    my_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year)
+	
+    # Access database, answer 1st question: What are the most popular three articles?
+    get_dbanswer_1()
+    q1_results_str = ""    
+    for q1_results_row in q1_rows_list:
+        q1_results_str = q1_results_str + q1_results_row[0] + ' -- ' + q1_results_row[1] + ' views ' + '\n'	
+    
+    # Fill in text report template with SQL results
     content += report_page.format(
-        report_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year),
-        q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
-        q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
-        q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
-        q2_results='Ursula La Multa — 2304 views',
-        q3_results='July 29, 2016 — 2.5% errors'
+        report_date = my_date
+	q1_results = q1_results_str
+	# Append remaining answers from the "database"
+        q2_results = 'Ursula La Multa — 2304 views',
+        q3_results = 'July 29, 2016 — 2.5% errors'
     )
 
     # Create or overwrite the output file
