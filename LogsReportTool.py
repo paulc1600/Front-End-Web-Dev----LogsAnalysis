@@ -18,7 +18,7 @@
 #  PPC | 04/21/2018 | Dump completed report directly to console
 # -----------------------------------------------------------------
 #
-import psycopg2
+import psycopg2   
 import datetime
 import calendar
 import re
@@ -49,8 +49,6 @@ report_page = '''
 ===============================================================================
 '''
 
-q1_rows_list = []        # What are the most popular three articles?
-
 # -----------------------------------------------------------------
 #  Get DB SQL Data for Questions
 # -----------------------------------------------------------------
@@ -63,7 +61,7 @@ def get_dbanswer_1():
     cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
     q1_rows_list = cursor.fetchall()
     # conn.close()
-    return
+    return q1_rows_list
 
 def open_report_page():
     # The text content for the report page
@@ -72,7 +70,8 @@ def open_report_page():
     my_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year)
 	
     # Access database, answer 1st question: What are the most popular three articles?
-    q1_rows_list = get_dbanswer_1()
+    get_dbanswer_1()
+    print(q1_rows_list)
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
         q1_results_str = q1_results_str + str(q1_results_row[0]) + ' -- ' + str(q1_results_row[1]) + ' views ' + '\n'
