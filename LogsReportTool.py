@@ -63,7 +63,7 @@ def get_dbanswer_1():
     PSQL = "SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3" 
     cursor.execute(PSQL)
     q1_rows_list = cursor.fetchall()
-    conn.close()
+    # conn.close()
     return q1_rows_list
 
 def open_report_page():
