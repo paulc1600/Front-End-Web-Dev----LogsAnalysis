@@ -21,8 +21,6 @@
 import psycopg2
 import datetime
 import calendar
-import webbrowser
-import os
 import re
 
 report_page = '''
