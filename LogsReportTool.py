@@ -63,7 +63,7 @@ def get_dbanswer_1():
     cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
     q1_rows_list = cursor.fetchall()
     # conn.close()
-    return q1_rows_list
+    return
 
 def open_report_page():
     # The text content for the report page
@@ -72,7 +72,7 @@ def open_report_page():
     my_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year)
 	
     # Access database, answer 1st question: What are the most popular three articles?
-    get_dbanswer_1()
+    q1_rows_list = get_dbanswer_1()
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
         q1_results_str = q1_results_str + str(q1_results_row[0]) + ' -- ' + str(q1_results_row[1]) + ' views ' + '\n'
