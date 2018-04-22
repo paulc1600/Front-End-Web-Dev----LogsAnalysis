@@ -76,7 +76,8 @@ def open_report_page():
     get_dbanswer_1()
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
-        q1_results_str = q1_results_str + q1_results_row[0] + ' -- ' + q1_results_row[1] + ' views ' + '\n'	
+        q1_results_str = q1_results_str + q1_results_row[0] + ' -- ' + q1_results_row[1] + ' views ' + '\n'
+	print q1_results_str 
     
     # Fill in text report template with SQL results
     content += report_page.format(
