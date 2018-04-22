@@ -60,8 +60,7 @@ def get_dbanswer_1():
     cursor = conn.cursor()
 
     # What are the most popular three articles?
-    PSQL = "SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3" 
-    cursor.execute(PSQL)
+    cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
     q1_rows_list = cursor.fetchall()
     # conn.close()
     return q1_rows_list
@@ -76,10 +75,7 @@ def open_report_page():
     get_dbanswer_1()
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
-        q1_results_str = q1_results_str + q1_results_row[0] + ' -- ' + q1_results_row[1] + ' views ' + '\n'
-
-    print q1_rows_list
-    print q1_results_str
+        q1_results_str = q1_results_str + str(q1_results_row[0]) + ' -- ' + str(q1_results_row[1]) + ' views ' + '\n'
     
     # Fill in text report template with SQL results
     content += report_page.format(
