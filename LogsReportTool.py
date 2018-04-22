@@ -14,7 +14,8 @@
 #         newsdata_report.txt          -- output report text file
 #
 # -----------------------------------------------------------------
-#  PPC | 04/21/2018 | Dummy database mockup code
+#  PPC | 04/20/2018 | Dummy database mockup code
+#  PPC | 04/21/2018 | Dump completed report directly to console
 # -----------------------------------------------------------------
 #
 import psycopg2
@@ -90,10 +91,11 @@ def open_report_page():
     output_file.write(content)
     output_file.close()
 
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)
-
+    # read the output file to the console 
+    with open('newsdata_report.txt', 'r') as fin:
+    	print fin.read()
+    fin.close()
+	
 # Main Path Code Here
 open_report_page()                   # In this file
 
