@@ -77,12 +77,11 @@ def open_report_page():
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
         q1_results_str = q1_results_str + q1_results_row[0] + ' -- ' + q1_results_row[1] + ' views ' + '\n'
-	print q1_results_str 
     
     # Fill in text report template with SQL results
     content += report_page.format(
-        report_date = my_date
-	q1_results = q1_results_str
+        report_date = my_date,
+	q1_results = q1_results_str,
 	# Append remaining answers from the "database"
         q2_results = 'Ursula La Multa — 2304 views',
         q3_results = 'July 29, 2016 — 2.5% errors'
