@@ -16,54 +16,6 @@
 # -----------------------------------------------------------------
 #  PPC | 04/21/2018 | Dummy database mockup code
 # -----------------------------------------------------------------
-# -----------------------------------------------------------------
-#  newsdata.sql table structures were as follows:
-#
-#  Table articles
-#   --------+---------------------------+--------------------------
-#   Column  | Type                      | Modifiers
-#   --------+---------------------------+--------------------------
-#   author  | integer                   | not null
-#   title   | text                      | not null
-#   slug    | text                      | not null
-#   lead    | text                      |
-#   body    | text                      |
-#   time    | timestamp with time zone  | default now()
-#   id      | integer                   | not null (1)
-#   --------+---------------------------+--------------------------
-#                (1) default nextval('articles_id_seq'::regclass)
-#
-#   Table authors
-#   --------+---------+--------------------------------------------
-#   Column  |  Type   | Modifiers
-#   --------+---------+--------------------------------------------
-#   name    | text    | not null
-#   bio     | text    |
-#   id      | integer | not null (2)
-#   --------+---------+--------------------------------------------
-#               (2) default nextval('authors_id_seq'::regclass)
-#   Indexes:
-#       "authors_pkey" PRIMARY KEY, btree (id)
-#   Referenced by:
-#       TABLE "articles" CONSTRAINT "articles_author_fkey"
-#              FOREIGN KEY (author) REFERENCES authors(id)
-#
-#   Table log
-#   --------+--------------------------+--------------------------
-#   Column  | Type                     | Modifiers
-#   --------+--------------------------+--------------------------
-#   path    | text                     |
-#   ip      | inet                     |
-#   method  | text                     |
-#   status  | text                     |
-#   time    | timestamp with time zone | default now()
-#   id      | integer                  | not null (3)
-#   --------+--------------------------+--------------------------
-#                 (3) default nextval('log_id_seq'::regclass)
-#   Indexes:
-#      "log_pkey" PRIMARY KEY, btree (id)
-#
-# -----------------------------------------------------------------
 #
 import psycopg2
 import datetime
@@ -123,7 +75,7 @@ def open_report_page():
 
     # Append the answers from the "database"
     content += report_page.format(
-        report_date = calendar.month_abbr[now.mon]+' '+str(now.day)+', '+str(now.year),
+        report_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year),
         q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
         q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
         q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
@@ -144,3 +96,53 @@ def open_report_page():
 
 # Main Path Code Here
 open_report_page()                   # In this file
+
+
+# -----------------------------------------------------------------
+#  newsdata.sql table structures were as follows:
+#
+#  Table articles
+#   --------+---------------------------+--------------------------
+#   Column  | Type                      | Modifiers
+#   --------+---------------------------+--------------------------
+#   author  | integer                   | not null
+#   title   | text                      | not null
+#   slug    | text                      | not null
+#   lead    | text                      |
+#   body    | text                      |
+#   time    | timestamp with time zone  | default now()
+#   id      | integer                   | not null (1)
+#   --------+---------------------------+--------------------------
+#                (1) default nextval('articles_id_seq'::regclass)
+#
+#   Table authors
+#   --------+---------+--------------------------------------------
+#   Column  |  Type   | Modifiers
+#   --------+---------+--------------------------------------------
+#   name    | text    | not null
+#   bio     | text    |
+#   id      | integer | not null (2)
+#   --------+---------+--------------------------------------------
+#               (2) default nextval('authors_id_seq'::regclass)
+#   Indexes:
+#       "authors_pkey" PRIMARY KEY, btree (id)
+#   Referenced by:
+#       TABLE "articles" CONSTRAINT "articles_author_fkey"
+#              FOREIGN KEY (author) REFERENCES authors(id)
+#
+#   Table log
+#   --------+--------------------------+--------------------------
+#   Column  | Type                     | Modifiers
+#   --------+--------------------------+--------------------------
+#   path    | text                     |
+#   ip      | inet                     |
+#   method  | text                     |
+#   status  | text                     |
+#   time    | timestamp with time zone | default now()
+#   id      | integer                  | not null (3)
+#   --------+--------------------------+--------------------------
+#                 (3) default nextval('log_id_seq'::regclass)
+#   Indexes:
+#      "log_pkey" PRIMARY KEY, btree (id)
+#
+# -----------------------------------------------------------------
