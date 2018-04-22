@@ -67,6 +67,7 @@
 #
 import psycopg2
 import datetime
+import calendar
 import webbrowser
 import os
 import re
@@ -122,7 +123,7 @@ def open_report_page():
 
     # Append the answers from the "database"
     content += report_page.format(
-        report_date = str(now.month)+' '+str(now.day)+', '+str(now.year),
+        report_date = calendar.month_abbr[now.mon]+' '+str(now.day)+', '+str(now.year),
         q1_results_row1="Princess Shellfish Marries Prince Handsome — 1201 views",
         q1_results_row2="Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views",
         q1_results_row3="Political Scandal Ends In Political Scandal — 553 views",
