@@ -49,36 +49,26 @@ report_page = '''
 ===============================================================================
 '''
 
-q1_rows_list = []
-
-# -----------------------------------------------------------------
-#  Get DB SQL Data for Questions
-# -----------------------------------------------------------------
-def get_dbanswer_1():
-    """Get DB SQL Data for Questions"""
-    conn = psycopg2.connect("dbname=news")
-    cursor = conn.cursor()
-
-    # What are the most popular three articles?
-    cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
-    q1_rows_list = cursor.fetchall()
-    # conn.close()
-    return q1_rows_list
-
 def open_report_page():
     # The text content for the report page
     content = ''
+    
+    # Build Date String for Report
     now = datetime.datetime.now()
     my_date = calendar.month_abbr[now.month]+' '+str(now.day)+', '+str(now.year)
 	
     # Access database, answer 1st question: What are the most popular three articles?
-    get_dbanswer_1()
-    print(q1_rows_list)
+    conn = psycopg2.connect("dbname=news")
+    cursor = conn.cursor()
+    cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
+    q1_rows_list = cursor.fetchall()
+
+    # Build Question Answer 1 String for Report
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
         q1_results_str = q1_results_str + str(q1_results_row[0]) + ' -- ' + str(q1_results_row[1]) + ' views ' + '\n'
     
-    # Fill in text report template with SQL results
+    # Fill in text report template with all built strings and database answers
     content += report_page.format(
         report_date = my_date,
 	q1_results = q1_results_str,
@@ -87,6 +77,9 @@ def open_report_page():
         q3_results = 'July 29, 2016 — 2.5% errors'
     )
 
+    # No longer need database
+    conn.close()
+	
     # Create or overwrite the output file
     output_file = open('newsdata_report.txt', 'w')
 
