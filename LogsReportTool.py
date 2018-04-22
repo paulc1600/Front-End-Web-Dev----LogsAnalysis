@@ -35,16 +35,16 @@ report_page = '''
 1. What are the most popular three articles of all time? Which articles have
    been accessed the most?
 
-    {q1_results}
+{q1_results}
 
  2. Who are the most popular article authors of all time? Which authors get the
     most page views from all the articles they have written?
 
-    {q2_results}
+{q2_results}
 
 3. On which days did more than 1% of requests lead to errors?
 
-    {q3_results}
+{q3_results}
 
 ===============================================================================
 '''
@@ -63,17 +63,26 @@ def open_report_page():
     cursor.execute("SELECT articles.title, viewstable.views FROM articles JOIN viewstable on articles.slug = viewstable.slugpath ORDER BY viewstable.views DESC limit 3")
     q1_rows_list = cursor.fetchall()
 
+    # Answer 2nd question: Who are the most popular article authors?
+    cursor.execute("SELECT authors.name, SUM(authorstable.views) as TotalViews FROM authors JOIN authorstable ON authorstable.author = authors.id GROUP BY authors.name ORDER BY TotalViews DESC")
+    q2_rows_list = cursor.fetchall()
+	
     # Build Question Answer 1 String for Report
     q1_results_str = ""    
     for q1_results_row in q1_rows_list:
         q1_results_str = q1_results_str + str(q1_results_row[0]) + ' -- ' + str(q1_results_row[1]) + ' views ' + '\n'
-    
+
+    # Build Question Answer 2 String for Report
+    q2_results_str = ""    
+    for q2_results_row in q2_rows_list:
+        q2_results_str = q2_results_str + str(q2_results_row[0]) + ' -- ' + str(q2_results_row[1]) + ' views ' + '\n'	
+	
     # Fill in text report template with all built strings and database answers
     content += report_page.format(
         report_date = my_date,
 	q1_results = q1_results_str,
 	# Append remaining answers from the "database"
-        q2_results = 'Ursula La Multa — 2304 views',
+        q2_results = q2_results_str,
         q3_results = 'July 29, 2016 — 2.5% errors'
     )
 
