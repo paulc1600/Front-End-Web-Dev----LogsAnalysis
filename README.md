@@ -16,10 +16,12 @@
  ### Files  
  * LogsReportTool.py   -- report writing code
  * newsdata_report.txt -- output report text file
-
-  --- | ---------- | -----------------------------------------
-  PPC | 04/20/2018 | Dummy database mockup code
-  PPC | 04/21/2018 | Dump completed report directly to console
+ 
+ 
+  |     | Date       | Code Changes
+  | --- | ---------- | -----------------------------------------
+  | PPC | 04/20/2018 | Dummy database mockup code
+  | PPC | 04/21/2018 | Dump completed report directly to console
 
 ----------------------------------------------------------------------------
 Question 1 VIEW (viewstable) -- Currently In Database
