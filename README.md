@@ -1,15 +1,21 @@
 # Project-3---LogsAnalysis
 
  -----------------------------------------------------------------
- Udacity Course: Full Stack Web Developer
- Proj #3: Logs Reporting Tool
- Purpose: A reporting tool that prints out reports (in plain text) based on
-          the data in a PostgreSQL database. This reporting tool is a
-          Python 2.7 program using the psycopg2 module to connect to the
-          newsdata.sql database.
+ ## Udacity Course 
+ Full Stack Web Developer
+ 
+ ### Proj #3 
+ Logs Reporting Tool
+ 
+ ### Purpose 
+ A reporting tool that prints out reports (in plain text) based on
+ the data in a PostgreSQL database. This reporting tool is a
+ Python 2.7 program using the psycopg2 module to connect to the
+ newsdata.sql database.
 
- Files:  LogsReportTool.py            -- report writing code (this file)
-         newsdata_report.txt          -- output report text file
+ ### Files  
+ * LogsReportTool.py   -- report writing code
+ * newsdata_report.txt -- output report text file
 
  -----------------------------------------------------------------
   PPC | 04/20/2018 | Dummy database mockup code
