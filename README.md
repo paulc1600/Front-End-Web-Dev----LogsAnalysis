@@ -13,7 +13,14 @@
  Python 2.7 program using the psycopg2 module to connect to the
  newsdata.sql database.
 
- ### Files  
+ ### Running Project Code / Files  
+ To run project (in Python 2.7), simply run
+ ```
+ python LogsReportTool.py
+ ```
+ from the command line. Text report will appear in console. A copy of the report 
+ just created will also be stored in _newsdata_report.txt_ 
+ 
  * LogsReportTool.py   -- report writing code
  * newsdata_report.txt -- output report text file
  
@@ -22,6 +29,7 @@
   | --- | ---------- | -----------------------------------------
   | PPC | 04/20/2018 | Dummy database mockup code
   | PPC | 04/21/2018 | Dump completed report directly to console
+  | PPC | 04/30/2018 | Cleaned up PEP8 issues
 
 ----------------------------------------------------------------------------
 Question 1 VIEW (viewstable) -- Currently In Database
