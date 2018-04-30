@@ -96,7 +96,7 @@ def open_report_page():
     q2_results_str = ""    
     for q2_results_row in q2_rows_list:
 	q2e0_results_padded = str(q2_results_row[0]).ljust(32)
-        q2_results_str = q2_results_str + q2e0_results_padded + ' -- ' + str(q2_results_row[1]) + ' views ' + '\n'	
+        q2_results_str = q2_results_str + '\t' + q2e0_results_padded + ' -- ' + str(q2_results_row[1]) + ' views ' + '\n'	
 
     # Build Question Answer 3 String for Report
     q3_results_str = ""    
