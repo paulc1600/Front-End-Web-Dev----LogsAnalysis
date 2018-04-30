@@ -100,7 +100,8 @@ def open_report_page():
     # Build Question Answer 3 String for Report
     q3_results_str = ""    
     for q3_results_row in q3_rows_list:
-        q3_results_str = q3_results_str + '\t' + str(q3_results_row[0]) + ' -- ' + str(q3_results_row[1]) + '% errors ' + '\n'	
+	q3e0_results_padded = str(q3_results_row[0]).ljust(32)
+        q3_results_str = q3_results_str + '\t' + q3e0_results_padded + ' -- ' + str(q3_results_row[1]) + '% errors ' + '\n'	
 	
     # Fill in text report template with all built strings and database answers
     content += report_page.format(
