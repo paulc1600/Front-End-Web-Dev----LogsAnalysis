@@ -1,9 +1,7 @@
 # Project-3---LogsAnalysis
 
  -----------------------------------------------------------------
- ## Udacity Course 
- Full Stack Web Developer
- 
+ ## Front End Web Development 
  ### Proj #3 
  Logs Reporting Tool
  
